@@ -36,7 +36,7 @@ public class BookService {
                 .isbn(req.getIsbn())
                 .title(req.getTitle())
                 .author(req.getAuthor())
-                .publisher(req.getTitle())
+                .publisher(req.getPublisher())
                 .build();
         bookRepository.save(_book);
         return new ResponseEntity<>(HttpStatus.CREATED);

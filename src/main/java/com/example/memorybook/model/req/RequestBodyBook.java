@@ -1,12 +1,12 @@
 package com.example.memorybook.model.req;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 public class RequestBodyBook {
     @Getter
     @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class BookInfo{
         private String isbn;
         private String title;

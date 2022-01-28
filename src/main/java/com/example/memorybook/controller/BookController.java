@@ -33,8 +33,8 @@ public class BookController {
 //  post 생성
     @PostMapping("/post")
     ResponseEntity<Void> createBook(
-            @RequestBody @Valid List<RequestBodyBook.BookInfo> Info
+            @RequestBody @Valid RequestBodyBook.BookInfo Info
     ){
-        return bookService.postListBook(Info);
+        return bookService.postBook(Info);
     }
 }
