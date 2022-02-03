@@ -16,13 +16,13 @@ import java.util.List;
 public class BookController {
     private final BookService bookService;
 
-//    Read all
+//    [Read] : all
     @GetMapping("/get/all")
     List<Book> getList(){
         return bookService.getBookAll();
     }
 
-//    Read one by id
+//    [Read] : One by id
     @GetMapping("/get/{id}")
     Book getBook(
             @PathVariable String id
@@ -30,11 +30,28 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-//  post 생성
+//    [Create] : 생성
     @PostMapping("/post")
     ResponseEntity<Void> createBook(
             @RequestBody @Valid RequestBodyBook.BookInfo Info
     ){
         return bookService.postBook(Info);
+    }
+
+//    [Update] : Update a book
+    @PutMapping(path = "/update/{BOOKID}")
+    ResponseEntity<Void> updateBook(
+            @PathVariable(name = "BOOKID") String bookIsbn,
+            @RequestBody @Valid RequestBodyBook.BookInfo bookInfo
+    ){
+        return bookService.updateBook(bookIsbn,bookInfo);
+    }
+
+//    [Delete] : Delete a book
+    @DeleteMapping("/delte/{BOOKID}")
+    ResponseEntity<Void> deleteBook(
+            @PathVariable(name = "BOOKID") String bookIsbn
+    ){
+        return bookService.deleteBook(bookIsbn);
     }
 }

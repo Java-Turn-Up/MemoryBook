@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -54,4 +56,34 @@ public class BookService {
         }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    public ResponseEntity<Void> updateBook(final String isbn, final RequestBodyBook.BookInfo req){
+        final Book book = bookRepository.findById(isbn)
+                .orElseThrow(() -> new RuntimeException("Book "+ isbn + " is not exist"));
+
+        // update
+        if(req.getTitle() != null){
+            book.setTitle(req.getTitle());
+        }
+        if(req.getPublisher()!=null){
+            book.setPublisher(req.getPublisher());
+        }
+        if(req.getAuthor()!=null){
+            book.setAuthor(req.getAuthor());
+        }
+
+        bookRepository.save(book);
+
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    public ResponseEntity<Void> deleteBook(final String isbn){
+        final Book book = bookRepository.findById(isbn)
+                .orElseThrow( () -> new RuntimeException("Book " + isbn + " is not exist"));
+
+        bookRepository.deleteById(isbn);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
