@@ -1,7 +1,7 @@
 package com.example.memorybook.service;
 
 import com.example.memorybook.model.httpException.ResponseError;
-import com.example.memorybook.model.model.Book;
+import com.example.memorybook.model.entity.Book;
 import com.example.memorybook.model.req.RequestBodyBook;
 import com.example.memorybook.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 

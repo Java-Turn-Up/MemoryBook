@@ -1,6 +1,6 @@
 package com.example.memorybook.service;
 
-import com.example.memorybook.model.model.Member;
+import com.example.memorybook.model.entity.Member;
 import com.example.memorybook.model.req.RequestBodyMember;
 import com.example.memorybook.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

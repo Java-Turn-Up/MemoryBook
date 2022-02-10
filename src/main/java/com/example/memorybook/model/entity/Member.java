@@ -1,4 +1,4 @@
-package com.example.memorybook.model.model;
+package com.example.memorybook.model.entity;
 
 import lombok.*;
 

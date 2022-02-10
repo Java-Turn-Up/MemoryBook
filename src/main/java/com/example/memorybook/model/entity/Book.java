@@ -1,4 +1,4 @@
-package com.example.memorybook.model.model;
+package com.example.memorybook.model.entity;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @Builder
 @Table(name = "Book")
-public class Book {
+public class Book extends AbstractTimeEntity{
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -30,4 +30,6 @@ public class Book {
 
     @Column(name = "publisher")
     private String publisher;
+
+
 }
