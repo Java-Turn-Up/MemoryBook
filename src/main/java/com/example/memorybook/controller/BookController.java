@@ -4,8 +4,10 @@ import com.example.memorybook.model.entity.Book;
 import com.example.memorybook.model.req.RequestBodyBook;
 import com.example.memorybook.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -53,5 +55,15 @@ public class BookController {
             @PathVariable(name = "BOOKID") String bookIsbn
     ){
         return bookService.deleteBook(bookIsbn);
+    }
+
+//    Test Upload img
+    @PostMapping("/post/{id}/img")
+    ResponseEntity<Void> postImg(
+            @PathVariable(name = "id") String isbn,
+            @RequestParam("file") MultipartFile file
+    ){
+        bookService.saveBookImage(isbn,file);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

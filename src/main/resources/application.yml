@@ -2,6 +2,10 @@ server:
   port: 8080
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useSSL=false
@@ -16,3 +20,9 @@ spring:
 
     # JPA 나 hibernate 를 통해 CRUD 를 실행하면 해당 CRUD 의 sql 을 로깅으로 보여준다.
     show-sql: true
+
+# img upload Path
+
+file:
+  upload:
+    rootPath: /Users/yeongdokim/IdeaProjects/TestUpload

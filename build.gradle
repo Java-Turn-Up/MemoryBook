@@ -30,9 +30,11 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //    swagger ui
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+//    Test Mode
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-
+//    Tika - fileUpload
+    implementation 'org.apache.tika:tika-core:2.1.0'
 }
 
 tasks.named('test') {
