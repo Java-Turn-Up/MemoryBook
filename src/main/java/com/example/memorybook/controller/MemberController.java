@@ -1,7 +1,7 @@
-package com.example.memorymember.controller;
+package com.example.memorybook.controller;
 
 import com.example.memorybook.model.entity.Member;
-import com.example.memorybook.model.req.RequestBodyMember;
+import com.example.memorybook.model.req.ReqFormatMember;
 import com.example.memorybook.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,16 +33,16 @@ public class MemberController {
     //    [Create] : 생성
     @PostMapping("/post")
     ResponseEntity<Void> createMember(
-            @RequestBody @Valid RequestBodyMember.MemberInfo Info
+            @RequestBody @Valid ReqFormatMember.BasicMemberInfo memberInfo
     ){
-        return memberService.postMember(Info);
+        return memberService.postMember(memberInfo);
     }
 
     //    [Update] : Update a member
     @PutMapping(path = "/update/{MEMBERID}")
     ResponseEntity<Void> updateMember(
             @PathVariable(name = "MEMBERID") Long memberId,
-            @RequestBody @Valid RequestBodyMember.MemberInfo memberInfo
+            @RequestBody @Valid ReqFormatMember.BasicMemberInfo memberInfo
     ){
         return memberService.updateMember(memberId,memberInfo);
     }

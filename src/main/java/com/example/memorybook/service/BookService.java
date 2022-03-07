@@ -3,7 +3,7 @@ package com.example.memorybook.service;
 import com.example.memorybook.model.entity.BookImage;
 import com.example.memorybook.model.httpException.ResponseError;
 import com.example.memorybook.model.entity.Book;
-import com.example.memorybook.model.req.RequestBodyBook;
+import com.example.memorybook.model.req.ReqFormatBook;
 import com.example.memorybook.repository.BookImgRepository;
 import com.example.memorybook.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +46,7 @@ public class BookService {
                 .orElseThrow(() -> ResponseError.NotFound.POST_NOT_EXISTS.getResponseException(id.toString()));
     }
 
-    public ResponseEntity<Void> postBook(final RequestBodyBook.BookInfo req){
+    public ResponseEntity<Void> postBook(final ReqFormatBook.BasicBookInfo req){
         final Book _book = Book.builder()
                 .isbn(req.getIsbn())
                 .title(req.getTitle())
@@ -57,8 +57,8 @@ public class BookService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Void> postListBook(final List<RequestBodyBook.BookInfo> req){
-        for(RequestBodyBook.BookInfo _info : req){
+    public ResponseEntity<Void> postListBook(final List<ReqFormatBook.BasicBookInfo> req){
+        for(ReqFormatBook.BasicBookInfo _info : req){
             final Book _Book = Book.builder()
                     .isbn(_info.getIsbn())
                     .title(_info.getTitle())
@@ -70,7 +70,7 @@ public class BookService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Void> updateBook(final String isbn, final RequestBodyBook.BookInfo req){
+    public ResponseEntity<Void> updateBook(final String isbn, final ReqFormatBook.BasicBookInfo req){
         final Book book = bookRepository.findById(isbn)
                 .orElseThrow(() -> new RuntimeException("Book "+ isbn + " is not exist"));
 

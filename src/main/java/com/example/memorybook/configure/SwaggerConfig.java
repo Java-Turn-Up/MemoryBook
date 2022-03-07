@@ -15,14 +15,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Locale;
 
 @Configuration
-@Profile({"default", "dev"})
-@EnableSwagger2
 public class SwaggerConfig {
     // path : /swagger-ui/index.html
 
     @Bean
     public Docket api() {
-        return new Docket(DocumentationType.OAS_30)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .ignoredParameterTypes(Locale.class)
                 .useDefaultResponseMessages(false)
                 .select()
@@ -35,7 +33,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("MemoryBook Swagger")
                 .description("REST API")
-                .version("0.0.1")
+                .version("1.0")
                 .build();
     }
 

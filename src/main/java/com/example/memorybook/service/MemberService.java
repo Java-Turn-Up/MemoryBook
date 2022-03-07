@@ -1,7 +1,7 @@
 package com.example.memorybook.service;
 
 import com.example.memorybook.model.entity.Member;
-import com.example.memorybook.model.req.RequestBodyMember;
+import com.example.memorybook.model.req.ReqFormatMember;
 import com.example.memorybook.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ public class MemberService {
     }
 
 //    [Update]: Update a member
-    public ResponseEntity<Void> updateMember(Long memberId, RequestBodyMember.MemberInfo memberInfo) {
+    public ResponseEntity<Void> updateMember(Long memberId, ReqFormatMember.BasicMemberInfo memberInfo) {
         Member _mem = memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("Member " + memberId + " doesn't exist"));
 
@@ -56,7 +56,7 @@ public class MemberService {
     }
 
 //    [Create]: Create a new member
-    public ResponseEntity<Void> postMember(RequestBodyMember.MemberInfo info) {
+    public ResponseEntity<Void> postMember(ReqFormatMember.BasicMemberInfo info) {
         Member _mem = Member.builder()
                 .FirstName(info.getFirstName())
                 .Lastname(info.getLastname())

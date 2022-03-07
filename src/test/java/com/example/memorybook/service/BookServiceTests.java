@@ -22,8 +22,6 @@ public class BookServiceTests {
                 .author("testing")
                 .build();
 
-        System.out.println("This is Testing : "+_book.getCreatedAt());
-
     }
     @Test
     public void getTest2(){

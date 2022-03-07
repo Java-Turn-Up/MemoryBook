@@ -1,19 +1,14 @@
 package com.example.memorybook.model.req;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Column;
-
-public class RequestBodyMember {
-
+public class ReqFormatMember {
     @Builder
     @Getter
+    @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class MemberInfo{
+    public static class BasicMemberInfo {
         private String FirstName;
         private String Lastname;
         private String Email;

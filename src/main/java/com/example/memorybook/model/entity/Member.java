@@ -1,5 +1,6 @@
 package com.example.memorybook.model.entity;
 
+import com.example.memorybook.model.entity.abstract_entity.AbstractTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,16 +12,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "member")
-public class Member extends AbstractTimeEntity{
+public class Member extends AbstractTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mem_id")
     private Long Mem_id;
 
-    @Column(name = "mem_firstName")
+    @Column(name = "mem_firstname")
     private String FirstName;
 
-    @Column(name = "mem_lastName")
+    @Column(name = "mem_lastname")
     private String Lastname;
 
     @Column(name = "mem_email")

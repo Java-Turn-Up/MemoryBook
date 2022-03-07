@@ -1,27 +1,27 @@
 package com.example.memorybook.model.entity;
 
+
 import com.example.memorybook.model.entity.abstract_entity.AbstractTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table(name = "book_image")
+@Table(name = "club")
+@Builder
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class BookImage extends AbstractTimeEntity {
+@NoArgsConstructor
+public class Club extends AbstractTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+            @Column(name = "club_id")
+    private Long Club_id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "isbn")
-    private Book book;
+    @Column(name = "club_title")
+    private String title;
 
-    @Column(name = "path")
-    private String path;
+    @Column(name = "club_info")
+    private String info;
 }

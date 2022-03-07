@@ -1,4 +1,4 @@
-package com.example.memorybook.model.entity;
+package com.example.memorybook.model.entity.abstract_entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

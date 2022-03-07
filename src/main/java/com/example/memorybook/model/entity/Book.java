@@ -1,5 +1,6 @@
 package com.example.memorybook.model.entity;
 
+import com.example.memorybook.model.entity.abstract_entity.AbstractTimeEntity;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -13,14 +14,14 @@ import java.sql.Date;
 @Getter
 @Setter
 @Builder
-public class Book extends AbstractTimeEntity{
+public class Book extends AbstractTimeEntity {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name="UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @Column(name = "isbn", columnDefinition = "varchar(13) default")
+    @Column(name = "isbn")
     private String isbn;
 
     @Column(name = "title")

@@ -1,8 +1,9 @@
 package com.example.memorybook.controller;
 
 import com.example.memorybook.model.entity.Book;
-import com.example.memorybook.model.req.RequestBodyBook;
+import com.example.memorybook.model.req.ReqFormatBook;
 import com.example.memorybook.service.BookService;
+import com.example.memorybook.service.PostingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
-
+    private final PostingService postingService;
 //    [Read] : all
     @GetMapping("/get/all")
     List<Book> getList(){
@@ -35,7 +36,7 @@ public class BookController {
 //    [Create] : 생성
     @PostMapping("/post")
     ResponseEntity<Void> createBook(
-            @RequestBody @Valid RequestBodyBook.BookInfo Info
+            @RequestBody @Valid ReqFormatBook.BasicBookInfo Info
     ){
         return bookService.postBook(Info);
     }
@@ -44,20 +45,20 @@ public class BookController {
     @PutMapping(path = "/update/{BOOKID}")
     ResponseEntity<Void> updateBook(
             @PathVariable(name = "BOOKID") String bookIsbn,
-            @RequestBody @Valid RequestBodyBook.BookInfo bookInfo
+            @RequestBody @Valid ReqFormatBook.BasicBookInfo bookInfo
     ){
         return bookService.updateBook(bookIsbn,bookInfo);
     }
 
 //    [Delete] : Delete a book
-    @DeleteMapping("/delte/{BOOKID}")
+    @DeleteMapping("/delete/{BOOKID}")
     ResponseEntity<Void> deleteBook(
             @PathVariable(name = "BOOKID") String bookIsbn
     ){
         return bookService.deleteBook(bookIsbn);
     }
 
-//    Test Upload img
+//    [post]:  Upload img
     @PostMapping("/post/{id}/img")
     ResponseEntity<Void> postImg(
             @PathVariable(name = "id") String isbn,
