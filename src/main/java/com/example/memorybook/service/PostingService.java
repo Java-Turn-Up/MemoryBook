@@ -37,10 +37,10 @@ public class PostingService {
     // [POST] : create a posting
     public ResponseEntity<Void> createPosting(final ReqFormatPosting.BasicPostingInfo req){
 
-        Book _book = bookRepository.findById(req.getBook_id())
-                .orElseThrow(() -> new RuntimeException("Book " + req.getBook_id() + " is not exist"));
-        Member _mem = memberRepository.findById(req.getCreator_id())
-                .orElseThrow(() -> new RuntimeException(("Member " + req.getCreator_id() + " is not exist")));
+        Book _book = bookRepository.findById(req.getBookId())
+                .orElseThrow(() -> new RuntimeException("Book " + req.getBookId() + " is not exist"));
+        Member _mem = memberRepository.findById(req.getCreatorId())
+                .orElseThrow(() -> new RuntimeException(("Member " + req.getCreatorId() + " is not exist")));
         postingRepository.save(
                 Posting.builder()
                         .Book_id(_book)

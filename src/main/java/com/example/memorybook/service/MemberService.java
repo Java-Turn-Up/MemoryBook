@@ -36,8 +36,8 @@ public class MemberService {
         if(memberInfo.getFirstName()!=null) {
             _mem.setFirstName(memberInfo.getFirstName());
         }
-        if(memberInfo.getLastname()!=null) {
-            _mem.setLastname(memberInfo.getLastname());
+        if(memberInfo.getLastName()!=null) {
+            _mem.setLastname(memberInfo.getLastName());
         }
         if(memberInfo.getEmail()!=null) {
             _mem.setEmail(memberInfo.getEmail());
@@ -59,7 +59,7 @@ public class MemberService {
     public ResponseEntity<Void> postMember(ReqFormatMember.BasicMemberInfo info) {
         Member _mem = Member.builder()
                 .FirstName(info.getFirstName())
-                .Lastname(info.getLastname())
+                .Lastname(info.getLastName())
                 .Email(info.getEmail())
                 .Phone(info.getPhone())
                 .Password(info.getPassword())

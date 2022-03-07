@@ -1,5 +1,6 @@
 package com.example.memorybook.model.res;
 
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 
 public class ResFormatClub {
@@ -9,8 +10,8 @@ public class ResFormatClub {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class ResFormatBasicClubInfo {
-        private String club_name;
-        private String club_info;
+        private String clubName;
+        private String clubInfo;
     }
 
 }

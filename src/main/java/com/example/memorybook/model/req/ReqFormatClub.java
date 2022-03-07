@@ -1,5 +1,6 @@
 package com.example.memorybook.model.req;
 
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 
 public class ReqFormatClub {
@@ -9,7 +10,7 @@ public class ReqFormatClub {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class BasicClubInfo {
-        private String club_title;
-        private String club_info;
+        private String clubTitle;
+        private String clubInfo;
     }
 }

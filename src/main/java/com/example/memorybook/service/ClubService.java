@@ -24,16 +24,16 @@ public class ClubService {
                 .orElseThrow(() -> new RuntimeException("There is no " + _cname + " exists"));
 
         return ResFormatClub.ResFormatBasicClubInfo.builder()
-                .club_name(_club.getTitle())
-                .club_info(_club.getInfo())
+                .clubName(_club.getTitle())
+                .clubInfo(_club.getInfo())
                 .build();
     }
 
     public List<ResFormatClub.ResFormatBasicClubInfo> getAllClub(){
         return clubRepository.findAll().stream()
                 .map(e -> (ResFormatClub.ResFormatBasicClubInfo.builder()
-                        .club_name(e.getTitle())
-                        .club_info(e.getInfo())
+                        .clubName(e.getTitle())
+                        .clubInfo(e.getInfo())
                         .build()
                 ))
                 .collect(Collectors.toList());
@@ -42,8 +42,8 @@ public class ClubService {
     public ResponseEntity<Void> postClub(final ReqFormatClub.BasicClubInfo req){
         clubRepository.save(
                 Club.builder()
-                .title(req.getClub_title())
-                .info(req.getClub_info())
+                .title(req.getClubTitle())
+                .info(req.getClubInfo())
                 .build()
         );
 
