@@ -58,4 +58,19 @@ public class ClubService {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    public List<ResFormatClub.BasicClubMemberInfo> getMembers(final Long clubId){
+        return clubRepository.findById(clubId).orElseThrow(()->new RuntimeException("There's no " + clubId + " exists."))
+                .getSigned().stream()
+                .map(
+                        (e) -> ( ResFormatClub.BasicClubMemberInfo.builder()
+                                .memPhone(e.getPhone())
+                                .memNickName(e.getNickname())
+                                .memLastName(e.getLastname())
+                                .memEmail(e.getEmail())
+                                .memFirstName(e.getFirstName())
+                                .build()
+                                )
+                ).collect(Collectors.toList());
+    }
 }

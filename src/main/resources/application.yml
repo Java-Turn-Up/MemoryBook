@@ -2,6 +2,10 @@ server:
   port: 8080
 
 spring:
+  output:
+    ansi:
+      # console color 적용
+      enabled: always
   servlet:
     multipart:
       max-file-size: 100MB
@@ -20,8 +24,28 @@ spring:
 
     # JPA 나 hibernate 를 통해 CRUD 를 실행하면 해당 CRUD 의 sql 을 로깅으로 보여준다.
     show-sql: true
+    properties:
+      hibernates:
+        dialect: org.hibernate.dialect.MYSQL8InnoDBDialect
+        # 보여지는 쿼리를 예브게 포맷팅
+        format_sql: true
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+      hibernate:
+        sql: DEBUG
+        type:
+          descriptor:
+            sql:
+              # hibernate 에 보여주는 로그에 있는 ? 값을 보여준다.
+              BasicBinder: TRACE
 
 # img upload Path
 file:
   upload:
     rootPath: /Users/yeongdokim/IdeaProjects/TestUpload
+

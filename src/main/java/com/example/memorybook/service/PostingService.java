@@ -46,19 +46,18 @@ public class PostingService {
                         .Book_id(_book)
                         .Creator(_mem)
                         .Title(req.getTitle())
-                        .Content(req.getTitle())
+                        .Content(req.getContent())
                         .Hit(req.getHit())
                         .Like(req.getLike())
                         .Dislike(req.getDislike())
                         .build()
         );
-
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // [Delete] : delete a posting
-    public ResponseEntity<Void> deletePosting(final Long psotingId){
-        postingRepository.deleteById(psotingId);
+    public ResponseEntity<Void> deletePosting(final Long postingId){
+        postingRepository.deleteById(postingId);
 
         return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }

@@ -14,4 +14,16 @@ public class ResFormatClub {
         private String clubInfo;
     }
 
+    @Getter
+    @Setter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class BasicClubMemberInfo{
+        private String memFirstName;
+        private String memLastName;
+        private String memEmail;
+        private String memPhone;
+        private String memNickName;
+    }
 }

@@ -6,7 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity(name = "Posting")
+@Entity
 @Table(name = "posting")
 @Builder
 @Getter
@@ -21,11 +21,11 @@ public class Posting extends AbstractTimeEntity {
 
 
     @OneToOne
-    @JoinColumn(name = "posting_book")
+    @JoinColumn(name = "posting_book",nullable = false)
     private Book Book_id;
 
     @OneToOne
-    @JoinColumn(name = "posting_creator")
+    @JoinColumn(name = "posting_creator",nullable = false)
     private Member Creator;
 
     @Column(name = "posting_title")

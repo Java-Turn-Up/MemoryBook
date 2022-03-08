@@ -31,6 +31,14 @@ public class ClubController {
         return clubService.getAllClub();
     }
 
+    // [Get] : get all club member
+    @GetMapping("/get/member/{clubId}")
+    List<ResFormatClub.BasicClubMemberInfo> getMembersInClub(
+            @PathVariable("clubId") Long id
+    ){
+        return clubService.getMembers(id);
+    }
+
     // [Post] : post a club
     @PostMapping("/post")
     ResponseEntity<Void> postClub(
