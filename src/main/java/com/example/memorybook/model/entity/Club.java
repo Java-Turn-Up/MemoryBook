@@ -27,10 +27,19 @@ public class Club extends AbstractTimeEntity {
     @Column(name = "club_info")
     private String info;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(name = "signed",
             joinColumns = @JoinColumn(name = "signed_club_id",referencedColumnName = "club_id"),
             inverseJoinColumns = @JoinColumn(name = "signed_mem_id",referencedColumnName = "mem_id")
     )
-    private List<Member> signed = new ArrayList<>();
+    private List<Member> Signed = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany
+    @JoinTable(name = "posted",
+            joinColumns = @JoinColumn(name = "posted_club_id", referencedColumnName = "club_id"),
+            inverseJoinColumns = @JoinColumn(name = "posted_posting_id", referencedColumnName = "posting_id")
+    )
+    private List<Posting> Posted = new ArrayList<>();
 }
