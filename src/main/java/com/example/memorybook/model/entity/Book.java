@@ -44,5 +44,5 @@ public class Book extends AbstractTimeEntity {
     private Long price;
     // publishedDate
     @Column(name = "publishdate")
-    private Date publishdate;
+    private Date publishDate;
 }

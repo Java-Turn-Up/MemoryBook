@@ -1,18 +1,19 @@
 package com.example.memorybook.service;
 
 import com.example.memorybook.model.entity.Book;
+import com.example.memorybook.model.entity.Club;
 import com.example.memorybook.model.entity.Member;
 import com.example.memorybook.model.entity.Posting;
+import com.example.memorybook.model.entity.relational_Entity.Posted;
 import com.example.memorybook.model.req.ReqFormatPosting;
-import com.example.memorybook.repository.BookRepository;
-import com.example.memorybook.repository.MemberRepository;
-import com.example.memorybook.repository.PostingRepository;
+import com.example.memorybook.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -20,6 +21,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostingService {
     private final PostingRepository postingRepository;
+    private final PostedRepository postedRepository;
+    private final ClubRepository clubRepository;
     private final BookRepository bookRepository;
     private final MemberRepository memberRepository;
 
@@ -35,22 +38,32 @@ public class PostingService {
     }
 
     // [POST] : create a posting
-    public ResponseEntity<Void> createPosting(final ReqFormatPosting.BasicPostingInfo req){
+    @Transactional
+    public ResponseEntity<Void> createNewPosting(final ReqFormatPosting.NewPostingBasicInfo req){
 
+        // check
         Book _book = bookRepository.findById(req.getBookId())
-                .orElseThrow(() -> new RuntimeException("Book " + req.getBookId() + " is not exist"));
-        Member _mem = memberRepository.findById(req.getCreatorId())
-                .orElseThrow(() -> new RuntimeException(("Member " + req.getCreatorId() + " is not exist")));
-        postingRepository.save(
+                .orElseThrow(() -> new RuntimeException("Book(:" + req.getBookId() + ") is not exist"));
+        Member _mem = memberRepository.findByNickName(req.getMemNickname())
+                .orElseThrow(() -> new RuntimeException(("Member(:" + req.getMemNickname() + ") is not exist")));
+        Club _clb = clubRepository.findByTitle(req.getClubTitle())
+                .orElseThrow(()-> new RuntimeException("Club Name(:" + req.getClubTitle() + ") is not exist"));
+
+        Posting _posting =  postingRepository.save(
                 Posting.builder()
-                        .Book_id(_book)
-                        .Creator(_mem)
-                        .Title(req.getTitle())
-                        .Content(req.getContent())
-                        .Hit(req.getHit())
-                        .Like(req.getLike())
-                        .Dislike(req.getDislike())
+                        .bookId(_book)
+                        .creator(_mem)
+                        .title(req.getPostingTitle())
+                        .content(req.getPostingContent())
+                        .like(0L)
+                        .dislike(0L)
+                        .hit(0L)
                         .build()
+        );
+        postedRepository.save(Posted.builder()
+                .postId(_posting.getPostId())
+                .clubId(_clb.getClubId())
+                .build()
         );
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -61,4 +74,6 @@ public class PostingService {
 
         return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
+
+
 }

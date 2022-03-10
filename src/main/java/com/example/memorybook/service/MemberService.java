@@ -37,7 +37,7 @@ public class MemberService {
             _mem.setFirstName(memberInfo.getFirstName());
         }
         if(memberInfo.getLastName()!=null) {
-            _mem.setLastname(memberInfo.getLastName());
+            _mem.setLastName(memberInfo.getLastName());
         }
         if(memberInfo.getEmail()!=null) {
             _mem.setEmail(memberInfo.getEmail());
@@ -49,7 +49,7 @@ public class MemberService {
             _mem.setPassword(memberInfo.getPassword());
         }
         if(memberInfo.getNickname()!=null) {
-            _mem.setNickname(memberInfo.getNickname());
+            _mem.setNickName(memberInfo.getNickname());
         }
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -58,12 +58,12 @@ public class MemberService {
 //    [Create]: Create a new member
     public ResponseEntity<Void> postMember(ReqFormatMember.BasicMemberInfo info) {
         Member _mem = Member.builder()
-                .FirstName(info.getFirstName())
-                .Lastname(info.getLastName())
-                .Email(info.getEmail())
-                .Phone(info.getPhone())
-                .Password(info.getPassword())
-                .Nickname(info.getNickname())
+                .firstName(info.getFirstName())
+                .lastName(info.getLastName())
+                .email(info.getEmail())
+                .phone(info.getPhone())
+                .password(info.getPassword())
+                .nickName(info.getNickname())
                 .build();
 
         memberRepository.save(_mem);

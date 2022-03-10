@@ -2,6 +2,7 @@ package com.example.memorybook.controller;
 
 import com.example.memorybook.model.entity.Book;
 import com.example.memorybook.model.req.ReqFormatBook;
+import com.example.memorybook.model.res.ResFormatBook;
 import com.example.memorybook.service.BookService;
 import com.example.memorybook.service.PostingService;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +22,13 @@ public class BookController {
     private final PostingService postingService;
 //    [Read] : all
     @GetMapping("/get/all")
-    List<Book> getList(){
+    List<ResFormatBook.BasicBookInfo> getList(){
         return bookService.getBookAll();
     }
 
 //    [Read] : One by id
     @GetMapping("/get/{id}")
-    Book getBook(
+    ResFormatBook.BasicBookInfo getBook(
             @PathVariable String id
     ){
         return bookService.getBookById(id);

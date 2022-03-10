@@ -1,10 +1,7 @@
 package com.example.memorybook.service;
 
-import com.example.memorybook.model.entity.Book;
 import com.example.memorybook.model.entity.Club;
-import com.example.memorybook.model.entity.Member;
 import com.example.memorybook.model.req.ReqFormatClub;
-import com.example.memorybook.model.res.ResFormatBook;
 import com.example.memorybook.model.res.ResFormatClub;
 import com.example.memorybook.repository.BookRepository;
 import com.example.memorybook.repository.ClubRepository;
@@ -70,14 +67,16 @@ public class ClubService {
                 .map(
                         (e) -> ( ResFormatClub.BasicClubMemberInfo.builder()
                                 .memPhone(e.getPhone())
-                                .memNickName(e.getNickname())
-                                .memLastName(e.getLastname())
+                                .memNickName(e.getNickName())
+                                .memLastName(e.getLastName())
                                 .memEmail(e.getEmail())
                                 .memFirstName(e.getFirstName())
                                 .build()
                                 )
                 ).collect(Collectors.toList());
     }
+
+
     public List<ResFormatClub.BasicClubPostingInfo> getPostings(final Long clubId){
         return clubRepository.findById(clubId).orElseThrow(()->new RuntimeException("There's no " + clubId + " exists."))
                 .getPosted().stream()
@@ -85,7 +84,7 @@ public class ClubService {
                         (e) -> ( ResFormatClub.BasicClubPostingInfo.builder()
                                 .postingTitle(e.getTitle())
                                 .postingContent(e.getContent())
-                                .postingBook(e.getBook_id())
+                                .postingBook(e.getBookId())
                                 .postingCreator(e.getCreator())
                                 .hit(e.getHit())
                                 .like(e.getLike())

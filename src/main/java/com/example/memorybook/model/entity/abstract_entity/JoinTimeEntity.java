@@ -16,5 +16,5 @@ import java.time.LocalDateTime;
 public abstract class JoinTimeEntity {
     @CreatedDate
     @Column(name = "joindate",nullable = false, updatable = false)
-    private LocalDateTime JoinedTime;
+    private LocalDateTime joinedTime;
 }

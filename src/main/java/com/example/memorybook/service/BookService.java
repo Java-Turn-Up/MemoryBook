@@ -4,6 +4,8 @@ import com.example.memorybook.model.entity.BookImage;
 import com.example.memorybook.model.httpException.ResponseError;
 import com.example.memorybook.model.entity.Book;
 import com.example.memorybook.model.req.ReqFormatBook;
+import com.example.memorybook.model.res.ResFormatBook;
+import com.example.memorybook.model.res.ResFormatClub;
 import com.example.memorybook.repository.BookImgRepository;
 import com.example.memorybook.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -33,17 +36,30 @@ public class BookService {
     @Value("${file.upload.rootPath}")
     private String uploadRootPath; // String 은 Spring 에서 관리되는 Bean 이 아니기 때문에 private final 로 선언 하면 안됨
 
-    public List<Book> getBookAll(){
-        if(bookRepository.findAll().isEmpty()) {
-            throw new RuntimeException("Empty List of books!");
-        }else{
-            return bookRepository.findAll();
-        }
+    public List<ResFormatBook.BasicBookInfo> getBookAll(){
+        return bookRepository.findAll().stream()
+                .map(
+                        (e) -> (ResFormatBook.BasicBookInfo.builder()
+                        .bookTitle(e.getTitle())
+                        .bookReview(e.getReview())
+                        .bookInfo(e.getInfo())
+                        .bookPrice(e.getPrice())
+                        .bookAuthor(e.getAuthor())
+                        .bookPublisher(e.getPublisher())
+                        .build())
+                ).collect(Collectors.toList());
     }
 
-    public Book getBookById(final String id){
-        return bookRepository.findById(id)
-                .orElseThrow(() -> ResponseError.NotFound.POST_NOT_EXISTS.getResponseException(id.toString()));
+    public ResFormatBook.BasicBookInfo getBookById(final String id){
+        Book _obj = bookRepository.findById(id).orElseThrow(() -> ResponseError.NotFound.POST_NOT_EXISTS.getResponseException(id.toString()));
+        return ResFormatBook.BasicBookInfo.builder()
+                .bookPublisher(_obj.getPublisher())
+                .bookTitle(_obj.getTitle())
+                .bookInfo(_obj.getInfo())
+                .bookAuthor(_obj.getAuthor())
+                .bookPrice(_obj.getPrice())
+                .bookReview(_obj.getReview())
+                .build();
     }
 
     public ResponseEntity<Void> postBook(final ReqFormatBook.BasicBookInfo req){
@@ -72,7 +88,7 @@ public class BookService {
 
     public ResponseEntity<Void> updateBook(final String isbn, final ReqFormatBook.BasicBookInfo req){
         final Book book = bookRepository.findById(isbn)
-                .orElseThrow(() -> new RuntimeException("Book "+ isbn + " is not exist"));
+                .orElseThrow(() -> ResponseError.NotFound.POST_NOT_EXISTS.getResponseException(isbn));
 
         // update
         if(req.getTitle() != null){

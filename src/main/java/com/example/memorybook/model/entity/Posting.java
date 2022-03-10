@@ -17,29 +17,29 @@ public class Posting extends AbstractTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "posting_id")
-    private Long Post_id;
+    private Long postId;
 
 
     @OneToOne
     @JoinColumn(name = "posting_book",nullable = false)
-    private Book Book_id;
+    private Book bookId;
 
     @OneToOne
     @JoinColumn(name = "posting_creator",nullable = false)
-    private Member Creator;
+    private Member creator;
 
     @Column(name = "posting_title")
-    private String Title;
+    private String title;
 
     @Column(name = "posting_content")
-    private String Content;
+    private String content;
 
     @Column(name = "posting_hit" )
-    private Long Hit;
+    private Long hit;
 
     @Column(name = "posting_like")
-    private Long Like;
+    private Long like;
 
     @Column(name = "posting_dislike")
-    private Long Dislike;
+    private Long dislike;
 }

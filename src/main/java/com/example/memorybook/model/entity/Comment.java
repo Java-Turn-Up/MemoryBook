@@ -16,18 +16,18 @@ import java.security.PrivateKey;
 public class Comment extends AbstractTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long CID;
+    private Long cId;
 
     @Column(name = "comment_author")
-    private Long Mem_id;
+    private Long memId;
 
     @Column(name = "comment_content")
-    private String Content;
+    private String content;
 
     @Column(name = "comment_like")
-    private Long Like;
+    private Long like;
 
     @Column(name = "comment_dislike")
-    private Long Dislike;
+    private Long dislike;
 }
 

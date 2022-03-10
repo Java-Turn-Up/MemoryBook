@@ -30,9 +30,9 @@ public class PostingController {
 
     @PostMapping("/post")
     ResponseEntity<Void> createPosing(
-            @RequestBody @Valid ReqFormatPosting.BasicPostingInfo req
+            @RequestBody @Valid ReqFormatPosting.NewPostingBasicInfo req
     ){
-        return postingService.createPosting(req);
+        return postingService.createNewPosting(req);
     }
 
     @DeleteMapping("/delete/{id}")
