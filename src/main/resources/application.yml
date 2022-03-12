@@ -1,0 +1,51 @@
+server:
+  port: 8080
+
+spring:
+  output:
+    ansi:
+      # console color 적용
+      enabled: always
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/memorybook?autoReconnect=true&useSSL=false
+    username: root
+    password: asdf1234
+    platform: mysql
+  jpa:
+    hibernate:
+      # 이미 테이블이 존재하는 상황에서 @Entity 의 속성이 추가될경우,
+      # 기존의 테이블의 데이터에는 변화없이 새로운 컬럼을 추가해준다.
+#      ddl-auto: update
+
+    # JPA 나 hibernate 를 통해 CRUD 를 실행하면 해당 CRUD 의 sql 을 로깅으로 보여준다.
+    show-sql: true
+    properties:
+      hibernates:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#        # 보여지는 쿼리를 예브게 포맷팅
+#        format_sql: true
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+      hibernate:
+        sql: DEBUG
+        type:
+          descriptor:
+            sql:
+              # hibernate 에 보여주는 로그에 있는 ? 값을 보여준다.
+              BasicBinder: TRACE
+
+# img upload Path
+file:
+  upload:
+    rootPath: /Users/yeongdokim/IdeaProjects/TestUpload
+
