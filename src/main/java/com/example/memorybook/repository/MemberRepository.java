@@ -12,5 +12,6 @@ import java.util.function.Function;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
+    Optional<Member> findByEmail(String email);
     Optional<Member> findByNickName(String string);
 }
