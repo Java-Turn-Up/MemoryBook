@@ -35,6 +35,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //    Tika - fileUpload
     implementation 'org.apache.tika:tika-core:2.1.0'
+//    Security
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 }
 
 tasks.named('test') {

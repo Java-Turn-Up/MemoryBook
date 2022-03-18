@@ -16,13 +16,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClubController {
     private final ClubService clubService;
+    // [Get] : get a exact club info
+    @GetMapping("/get/{clubId}")
+    ResFormatClub.ResFormatBasicClubInfo getClubById(
+        @PathVariable("clubId") Long id
+    ){
+        return clubService.getClubById(id);
+    }
 
     // [Get] : get a club info
     @GetMapping("/get/{clubName}")
-    ResFormatClub.ResFormatBasicClubInfo getClub(
+    List<ResFormatClub.ResFormatBasicClubInfo> getClub(
             @PathVariable("clubName") String clubName
     ){
-        return clubService.getClubInfo(clubName);
+        return clubService.getClubList(clubName);
     }
 
     // [Get] : get all club info
@@ -56,10 +63,10 @@ public class ClubController {
     }
 
     // [Delete] : delete a club
-    @DeleteMapping("/delete/{clubName}")
+    @DeleteMapping("/delete/{clubId}")
     ResponseEntity<Void> deleteClub(
-            @PathVariable("clubName") String reqName
+            @PathVariable("clubId") Long id
     ){
-        return clubService.deleteClub(reqName);
+        return clubService.deleteClub(id);
     }
 }
