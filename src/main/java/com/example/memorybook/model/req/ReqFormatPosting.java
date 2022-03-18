@@ -32,7 +32,7 @@ public class ReqFormatPosting {
         @NotBlank
         private String memNickname;
         @NotBlank
-        private String clubTitle;
+        private Long clubId;
 
         private String postingTitle;
         private String postingContent;

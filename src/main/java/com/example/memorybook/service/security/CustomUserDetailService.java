@@ -27,27 +27,11 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CustomUserDetailService implements UserDetailsService {
+public class CustomUserDetailService  {
     private final AuthenticationManager authenticationManager;
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Override
-    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        log.info("Authentication Started - UserDetailService");
-        // 로그인 로직 시작
-        // login Id 를 이용하여 DB 에서 User 객체를 가져온다.
-        Member _obj = memberRepository.findByEmail(userEmail).orElseThrow(()->new UsernameNotFoundException("Could not found user : " + userEmail));
-        // logging
-        log.info("Success find member {}", _obj);
-        return User.builder()
-                .username(_obj.getEmail())
-                .password(passwordEncoder.encode(_obj.getPassword()))
-                .roles("USER")
-                .build();
-    }
     public Authentication signIn(final ReqFormatUser.signIn req){
         return authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword())

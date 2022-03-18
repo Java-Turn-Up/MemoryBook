@@ -46,8 +46,8 @@ public class PostingService {
                 .orElseThrow(() -> new RuntimeException("Book(:" + req.getBookId() + ") is not exist"));
         Member _mem = memberRepository.findByNickName(req.getMemNickname())
                 .orElseThrow(() -> new RuntimeException(("Member(:" + req.getMemNickname() + ") is not exist")));
-        Club _clb = clubRepository.findByTitle(req.getClubTitle())
-                .orElseThrow(()-> new RuntimeException("Club Name(:" + req.getClubTitle() + ") is not exist"));
+        Club _clb = clubRepository.findById(req.getClubId())
+                .orElseThrow(()-> new RuntimeException("Club Name(:" + req.getClubId() + ") is not exist"));
 
         Posting _posting =  postingRepository.save(
                 Posting.builder()

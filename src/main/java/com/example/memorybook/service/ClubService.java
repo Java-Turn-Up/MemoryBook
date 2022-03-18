@@ -21,14 +21,24 @@ public class ClubService {
     private final ClubRepository clubRepository;
     private final BookRepository bookRepository;
 
-    public ResFormatClub.ResFormatBasicClubInfo getClubInfo(final String _cname){
-        Club _club = clubRepository.findByTitle(_cname)
-                .orElseThrow(() -> new RuntimeException("There is no " + _cname + " exists"));
-
+    public ResFormatClub.ResFormatBasicClubInfo getClubById(final Long id){
+        Club club = clubRepository.findById(id).orElseThrow(()-> new RuntimeException("Club not exists: " + id));
         return ResFormatClub.ResFormatBasicClubInfo.builder()
-                .clubName(_club.getTitle())
-                .clubInfo(_club.getInfo())
+                .clubName(club.getTitle())
+                .clubInfo(club.getInfo())
                 .build();
+    }
+
+    public List<ResFormatClub.ResFormatBasicClubInfo> getClubList(final String _cname){
+        List<Club> _club = clubRepository.findByTitle(_cname);
+
+        return clubRepository.findByTitle(_cname).stream()
+                .map( (e) -> (
+                        ResFormatClub.ResFormatBasicClubInfo.builder()
+                                .clubName(e.getTitle())
+                                .clubInfo(e.getInfo())
+                                .build())
+                ).collect(Collectors.toList());
     }
 
     public List<ResFormatClub.ResFormatBasicClubInfo> getAllClub(){
@@ -52,9 +62,9 @@ public class ClubService {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    public ResponseEntity<Void> deleteClub(final String req){
-        Club obj = clubRepository.findByTitle(req)
-                .orElseThrow(()-> new RuntimeException("There is no " + req + " club."));
+    public ResponseEntity<Void> deleteClub(final Long id){
+        Club obj = clubRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("There is no " + id + " club."));
 
         clubRepository.delete(obj);
 
