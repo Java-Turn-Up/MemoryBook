@@ -38,6 +38,8 @@ dependencies {
 //    Security
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+//    ElasticSearch
+    compileOnly 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 }
 
 tasks.named('test') {
