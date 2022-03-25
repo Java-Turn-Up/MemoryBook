@@ -43,18 +43,18 @@ public class BookController {
     }
 
 //    [Update] : Update a book
-    @PutMapping(path = "/update/{BOOKID}")
+    @PutMapping(path = "/update/{bookId}")
     ResponseEntity<Void> updateBook(
-            @PathVariable(name = "BOOKID") String bookIsbn,
+            @PathVariable(name = "bookId") String bookIsbn,
             @RequestBody @Valid ReqFormatBook.BasicBookInfo bookInfo
     ){
         return bookService.updateBook(bookIsbn,bookInfo);
     }
 
 //    [Delete] : Delete a book
-    @DeleteMapping("/delete/{BOOKID}")
+    @DeleteMapping("/delete/{bookId}")
     ResponseEntity<Void> deleteBook(
-            @PathVariable(name = "BOOKID") String bookIsbn
+            @PathVariable(name = "bookId") String bookIsbn
     ){
         return bookService.deleteBook(bookIsbn);
     }

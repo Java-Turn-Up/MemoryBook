@@ -13,7 +13,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/memorybook?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
+    username: root #dbmasteruser
     password: asdf1234
     platform: mysql
   jpa:

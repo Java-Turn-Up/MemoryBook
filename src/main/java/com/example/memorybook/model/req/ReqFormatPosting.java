@@ -11,7 +11,7 @@ public class ReqFormatPosting {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class BasicPostingInfo{
+    public static class BasicPostingInfoReq{
         private String bookId;
         private Long creatorId;
         private String title;

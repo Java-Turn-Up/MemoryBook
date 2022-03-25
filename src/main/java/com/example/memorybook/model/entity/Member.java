@@ -24,7 +24,7 @@ public class Member extends AbstractTimeEntity {
     @Column(name = "mem_lastname")
     private String lastName;
 
-    @Column(name = "mem_email")
+    @Column(name = "mem_email",unique = true)
     private String email;
 
     @Column(name = "mem_phone")
@@ -33,6 +33,6 @@ public class Member extends AbstractTimeEntity {
     @Column(name = "mem_password")
     private String password;
 
-    @Column(name = "mem_nickname",nullable = false, unique = true)
+    @Column(name = "mem_nickname",nullable = false, unique = false)
     private String nickName;
 }

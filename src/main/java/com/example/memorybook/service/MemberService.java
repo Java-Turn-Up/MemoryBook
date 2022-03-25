@@ -2,6 +2,7 @@ package com.example.memorybook.service;
 
 import com.example.memorybook.model.entity.Member;
 import com.example.memorybook.model.req.ReqFormatMember;
+import com.example.memorybook.model.res.ResFormatMember;
 import com.example.memorybook.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -17,15 +19,49 @@ import java.util.List;
 public class MemberService {
     private final MemberRepository memberRepository;
 
+//    [Read] : Read member by email
+    public ResFormatMember.BasicMemberInfoRes getByEmail(final String email){
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Member " + email + " doesn't exist"));
+        return ResFormatMember.BasicMemberInfoRes.builder()
+                .firstName(member.getFirstName())
+                .lastName(member.getLastName())
+                .email(member.getEmail())
+                .phone(member.getPhone())
+                .nickName(member.getNickName())
+                .created(member.getCreatedat())
+                .updated(member.getUpdatedat())
+                .build();
+    }
+
 //    [Read] : Read All member in DB
-    public List<Member> getMemberAll() {
-        return memberRepository.findAll();
+    public List<ResFormatMember.BasicMemberInfoRes> getMemberAll() {
+        return memberRepository.findAll().stream()
+                .map(
+                        (e) -> (ResFormatMember.BasicMemberInfoRes.builder()
+                                .firstName(e.getFirstName())
+                                .lastName(e.getLastName())
+                                .email(e.getEmail())
+                                .phone(e.getPhone())
+                                .nickName(e.getNickName())
+                                .created(e.getCreatedat())
+                                .updated(e.getUpdatedat())
+                                .build())
+                ).collect(Collectors.toList());
     }
 
 //    [Read]: Read a member
-    public Member getMemberById(Long id) {
-        return memberRepository.findById(id)
+    public ResFormatMember.BasicMemberInfoRes getMemberById(Long id) {
+        Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Member " + id + " doesn't exist"));
+        return ResFormatMember.BasicMemberInfoRes.builder()
+                .firstName(member.getFirstName())
+                .created(member.getCreatedat())
+                .updated(member.getUpdatedat())
+                .phone(member.getPhone())
+                .email(member.getEmail())
+                .lastName(member.getLastName())
+                .nickName(member.getNickName())
+                .build();
     }
 
 //    [Update]: Update a member
