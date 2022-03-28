@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+//    id 'com.[vue project 이름]' version ""
     id 'java'
 }
 
@@ -45,3 +46,12 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// vue js module 추가
+//node{
+//    version = ''
+//    npmVersion = ''
+//    workDir = file("")
+//    npmWorkDir = file("")
+//    nodeModulesDir = file("")
+//}
